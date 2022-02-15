@@ -19,16 +19,10 @@ class DataMixin:
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Username',widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Username','autocomplete':'off'}))
     password = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password','autocomplete':'off'}))
-    # error_css_class = "d-none alert alert-light"
-    # error_messages= ['']
 
 class LoginUser(LoginView):
     form_class = LoginUserForm
     template_name = 'main/log_in.html'
-
-    # succes_url = reverse_lazy('home')
-    # def get_success_url(request, user):
-    #     return redirect('home', permanent=True)
 
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(label='Username',widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Username','autocomplete':'off'}))
