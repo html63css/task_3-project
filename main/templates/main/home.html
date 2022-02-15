@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+<h1 class="text-center">Hello, {{ request.user.username }}</h1>
+<br>
+<div class="jumbotron align-items-center min-vh-100">
+  <div class="container text-center">
+
+    <form action="{% url 'log_out' %}">
+      <input type="submit" class="btn btn-primary" value="Log out of your account">
+    </form>
+    <br>
+
+    <form action="">
+      <input type="submit" class="btn btn-primary" value="TABLE ACCOUNT">
+    </form>
+  </div>
+</div>
+
+{% else %}
+
+  <h1 class="text-center">You are not authorized</h1>
+<br>
+  <div class="jumbotron align-items-center min-vh-100">
+    <div class="container text-center">
+      <!-- Log in to account -->
+      <form action="log_in">
+        <input type="submit" class="btn btn-primary" value="Log in to your account">
+      </form>
+      <br>
+      <!-- Create account -->
+      <form action="sign_up">
+        <input type="submit" class="btn btn-primary" value="Create account">
+      </form>
+    </div>
+  </div>
+
+{% endif %}
+
+
+{% endblock %}

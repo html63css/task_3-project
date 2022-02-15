@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<div class="jumbotron d-flex align-items-center min-vh-100">
+  <div class="container text-center border border-dark">
+    <h1 class="text-center">Log in to your account</h1>
+    <form method="post">
+      {% csrf_token %}
+
+    <div class="alert alert-danger" role="alert">
+      {% if form.non_field_errors %}
+      {{form.non_field_errors}}
+      {% endif %}
+    </div>
+{{ form.cleaned_data  }}
+
+    {% for e in form.errors.errors_messages %}
+    {{e}}
+    {% endfor %}
+
+    {% if form.subject.errors %}
+        <ol>
+        {% for error in form.subject.errors %}
+            <li><strong>{{ error|escape }}</strong></li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+
+
+      {% for f in form %}
+      <div class = "row g-3 align-items-center justify-content-center">
+          <div class="col-auto">
+            {{f}}
+          </div>
+      </div>
+      <br>
+      <div class="form-error">
+      </div>
+      {% endfor %}
+      <button class="btn btn-primary" type="submit">Log in</button>
+    </form>
+  </div>
+</div>
+
+
+{% endblock content %}
