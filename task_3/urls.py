@@ -26,4 +26,5 @@ urlpatterns = [
     path('log_in', LoginUser.as_view(), name='log_in'),
     path('log_out', auth_views.LogoutView.as_view(), name='log_out'),
     path('home', views.home),
+    path('users_table', views.users_table, name='users_table'),
 ]

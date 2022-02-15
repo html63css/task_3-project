@@ -1,0 +1,76 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+<h1 class="text-center">User: {{ request.user.username }}</h1>
+
+<form>
+<div class="jumbotron d-flex align-items-center ">
+  <div class="container text-center">
+    <button disabled class="btn btn-primary" type="submit">Block</button>
+    <button disabled class="btn btn-primary" type="submit">Unblock</button>
+    <button disabled class="btn btn-primary" type="submit">Delete</button>
+  </div>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"><input disabled class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
+      <th scope="col">id</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+
+
+
+
+                        <!-- Перевести на англ -->
+      <th scope="col">Дата регистрации</th>
+                        <!-- Перевести на англ -->
+      <th scope="col">Дата последнего входа</th>
+                        <!-- Перевести на англ -->
+
+
+
+
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in context %}
+    <tr>
+      <th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
+      <th scope="row">{{i.id}}</th>
+      <td>{{i.username}}</td>
+      <td>{{i.email}}</td>
+      <td>{{i.date_joined}}</td>
+      <td>{{i.last_login}}</td>
+      <td>STATUS</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</form>
+
+
+
+{% else %}
+  <h1 class="text-center">You are not authorized</h1>
+  <br>
+  <div class="jumbotron align-items-center min-vh-100">
+    <div class="container text-center">
+      <!-- Log in to account -->
+      <form action="log_in">
+        <input type="submit" class="btn btn-primary" value="Log in to your account">
+      </form>
+      <br>
+      <!-- Create account -->
+      <form action="sign_up">
+        <input type="submit" class="btn btn-primary" value="Create account">
+      </form>
+    </div>
+  </div>
+{% endif %}
+
+{% endblock %}

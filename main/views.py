@@ -9,3 +9,7 @@ def home(request):
     'title':'Home page'
     }
     return render(request, 'main/home.html', {'context':context})
+
+def users_table(request):
+    context = User.objects.all()
+    return render(request, 'main/users_table.html', { 'context':context} )
