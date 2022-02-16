@@ -26,9 +26,9 @@
 
 
                         <!-- Перевести на англ -->
-      <th scope="col">Дата регистрации</th>
+      <th scope="col">Registration date</th>
                         <!-- Перевести на англ -->
-      <th scope="col">Дата последнего входа</th>
+      <th scope="col">Last login date</th>
                         <!-- Перевести на англ -->
 
 
@@ -46,14 +46,20 @@
       <td>{{i.email}}</td>
       <td>{{i.date_joined}}</td>
       <td>{{i.last_login}}</td>
-      <td>STATUS</td>
+      <td>     </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 </form>
 
-
+<div class="jumbotron align-items-center min-vh-100">
+  <div class="container text-center">
+<form action="{% url 'log_out' %}">
+  <input type="submit" class="btn btn-primary" value="Log out of your account">
+</form>
+</div>
+</div>
 
 {% else %}
   <h1 class="text-center">You are not authorized</h1>
