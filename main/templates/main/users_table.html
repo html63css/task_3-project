@@ -55,14 +55,14 @@
 </script>
 
 {% if request.user.is_authenticated %}
-<h1 class="text-center">User: {{ request.user.username }}</h1>
+<h1 class="text-center text-muted">User: {{ request.user.username }}</h1>
 
 <form action="{% url 'users_table' %}" method="get">
 <div class="jumbotron d-flex align-items-center ">
   <div class="container text-center">
     <button name="action" value="Block" class="btn btn-primary" type="submit">Block</button>
     <button name="action" value="Unblock" class="btn btn-primary" type="submit">Unblock</button>
-    <button disabled name="action" value="Delete" class="btn btn-primary" type="submit">Delete</button>
+    <button name="action" value="Delete" class="btn btn-primary" type="submit">Delete</button>
   </div>
 </div>
 <table class="table">
@@ -100,18 +100,15 @@
 </form>
 </div>
 </div>
-
 {% else %}
   <h1 class="text-center">You are not authorized</h1>
   <br>
   <div class="jumbotron align-items-center">
     <div class="container text-center">
-      <!-- Log in to account -->
       <form action="log_in">
         <input type="submit" class="btn btn-primary" value="Log in to your account">
       </form>
       <br>
-      <!-- Create account -->
       <form action="sign_up">
         <input type="submit" class="btn btn-primary" value="Create account">
       </form>

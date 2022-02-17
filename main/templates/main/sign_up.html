@@ -5,16 +5,17 @@
 <div class="jumbotron d-flex align-items-center min-vh-100">
   <div class="container text-center border border-dark">
     <h1 class="text-center">New account</h1>
+    <br>
     <form method="post">
       {% csrf_token %}
 
       {% if form.errors %}
       <div class="alert alert-danger" role="alert">
-        {{ form.errors.as_json }}
-        <!-- {% for e in form.errors.as_json %}
-        {{e}}
-        <br>
-        {% endfor %} -->
+        {% for e in form.errors.items %}
+          {% for i in e %}
+            {{i}}
+          {% endfor %}
+        {% endfor %}
       </div>
       {% endif %}
 
@@ -27,7 +28,8 @@
       <br>
       {% endfor %}
       <button class="btn btn-primary" type="submit">Sing up</button>
-
+      <br>
+      <br>
     </form>
   </div>
 </div>

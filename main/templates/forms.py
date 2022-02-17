@@ -1,14 +1,14 @@
 from django import forms
-from django.urls import reverse_lazy
-from django.contrib import auth
-from django.views.generic import CreateView
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from main.models import Account
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import auth
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 
 class DataMixin:
     def get_user_context(self, **kwargs):
@@ -18,14 +18,6 @@ class DataMixin:
         if ('cat_selected' not in context):
             context['cat_selected'] = 0
         return context
-
-# class AuthenticationFormUser(AuthenticationForm):
-#     def confirm_login_allowed(self, user):
-#         if (1):
-#             raise ValidationError(
-#             ("This account is blocked."),
-#             code = 'block'
-#             )
 
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Username',widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Username','autocomplete':'off'}))
@@ -51,12 +43,8 @@ class RegisterUserForm(UserCreationForm):
         model = User
         fields = ('username', 'last_name', 'email', 'password1', 'password2')
 
-class RegisterUser(DataMixin, CreateView):
+class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'main/sign_up.html'
     def get_success_url(self, user=None):
         return reverse_lazy('log_in')
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title="Регистрация")
-        return dict(list(context.items()) + list(c_def.items()))
