@@ -7,6 +7,11 @@ from django.db.models.signals import post_save
 class Account(models.Model):
     data = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
     status = models.CharField(max_length=20, default='Unblock')
+
+    def set_status(self, x):
+        self.status = x
+        self.save()
+
     @receiver(post_save, sender=User)
     def create_user_account(sender, instance, created, **kwargs):
         if created:

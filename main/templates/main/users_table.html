@@ -1,11 +1,63 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+<script type="text/javascript">
+
+  function check()
+  {
+    var check = document.getElementsByTagName('input');
+    for(var i=0; i<check.length;++i)
+    {
+      if(check[i].type=='checkbox')
+      {
+        check[i].checked=true;
+      }
+    }
+  }
+
+  function uncheck()
+  {
+    var uncheck = document.getElementsByTagName('input');
+    for(var i=0; i<uncheck.length;++i)
+    {
+      if(uncheck[i].type=='checkbox')
+      {
+        uncheck[i].checked=false;
+      }
+    }
+  }
+
+  function all_check()
+  {
+    var all_chbox = document.getElementById('all_chbox');
+    if (all_chbox.checked || all_chbox === null )
+    {
+      check();
+    }
+    else
+    {
+      uncheck();
+    }
+  }
+
+  function all_check_reaction()
+  {
+    var chbox_list = document.getElementsByName('id_user');
+    var all_chbox = document.getElementById('all_chbox');
+    all_chbox.checked = true;
+    chbox_list.forEach((item) => {
+      if (item.checked == false)
+      {
+        all_chbox.checked = false;
+      }
+    });
+  }
+</script>
 
 {% if request.user.is_authenticated %}
 <h1 class="text-center">User: {{ request.user.username }}</h1>
 
-<form action="users_table" method="get">
+<form action="{% url 'users_table' %}" method="get">
 <div class="jumbotron d-flex align-items-center ">
   <div class="container text-center">
     <button name="action" value="Block" class="btn btn-primary" type="submit">Block</button>
@@ -16,7 +68,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col"><input class="form-check-input" type="checkbox" value="all" name="id_user" id="flexCheckDefault"></th>
+      <th scope="col"><input class="form-check-input" type="checkbox" id="all_chbox" onclick="all_check();"></th>
       <th scope="col">id</th>
       <th scope="col">Username</th>
       <th scope="col">Email</th>
@@ -28,7 +80,7 @@
   <tbody>
     {% for i,j in context.items %}
     <tr>
-      <th><input class="form-check-input" type="checkbox" value="{{ i.id }}" name="id_user" id="flexCheckDefault"></th>
+      <th><input class="form-check-input" type="checkbox" value="{{ i.id }}" name="id_user" id="chbox" onclick="all_check_reaction();"></th>
       <th scope="row">{{i.id}}</th>
       <td>{{i.username}}</td>
       <td>{{i.email}}</td>
@@ -41,7 +93,7 @@
 </table>
 </form>
 
-<div class="jumbotron align-items-center min-vh-100">
+<div class="jumbotron align-items-center">
   <div class="container text-center">
 <form action="{% url 'log_out' %}">
   <input type="submit" class="btn btn-primary" value="Log out of your account">
