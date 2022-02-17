@@ -19,7 +19,7 @@ def users_table(request):
             for i in GET_list_id_user:
                 d = Account.objects.get(data_id=i)
                 d.set_status('Block')
-                if (int(i) == int(request.user.id)):
+                if (request.user.id and int(i) == int(request.user.id)):
                     logout(request)
         if (GET['action'] == 'Unblock'):
             for i in GET_list_id_user:
