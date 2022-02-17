@@ -1,5 +1,6 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from .templates.forms import  *
 from .models import *
 from django.contrib.auth import logout
@@ -21,6 +22,7 @@ def users_table(request):
                 d.set_status('Block')
                 if (request.user.id and int(i) == int(request.user.id)):
                     logout(request)
+                    return HttpResponseRedirect("log_in")
         if (GET['action'] == 'Unblock'):
             for i in GET_list_id_user:
                 d = Account.objects.get(data_id=i)
