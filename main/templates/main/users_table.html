@@ -5,7 +5,7 @@
 {% if request.user.is_authenticated %}
 <h1 class="text-center">User: {{ request.user.username }}</h1>
 
-<form action="users_table" method="get">
+<form action="{% url 'users_table' %}" method="get">
 <div class="jumbotron d-flex align-items-center ">
   <div class="container text-center">
     <button name="action" value="Block" class="btn btn-primary" type="submit">Block</button>
@@ -16,7 +16,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col"><input class="form-check-input" type="checkbox" value="all" name="id_user" id="flexCheckDefault"></th>
+      <th scope="col"><input class="form-check-input" type="checkbox" id="flexCheckDefault"></th>
       <th scope="col">id</th>
       <th scope="col">Username</th>
       <th scope="col">Email</th>
