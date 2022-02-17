@@ -19,20 +19,12 @@ def users_table(request):
             for i in GET_list_id_user:
                 d = Account.objects.get(data_id=i)
                 d.set_status('Block')
-<<<<<<< HEAD
                 if (int(i) == int(request.user.id)):
                     logout(request)
-=======
-                print("BLOCK USER:  %s" %d.status)
->>>>>>> 0ca27cc1f93f47fae5a4a62753172412a7d35f33
         if (GET['action'] == 'Unblock'):
             for i in GET_list_id_user:
                 d = Account.objects.get(data_id=i)
                 d.set_status('Unblock')
-<<<<<<< HEAD
-=======
-                print("UNBLOCK USER:  %s" %d.status)
->>>>>>> 0ca27cc1f93f47fae5a4a62753172412a7d35f33
         if (GET['action'] == 'Delete' and GET['id_user']):
             for i in GET_list_id_user:
                 d = Account.objects.get(data_id=i)
