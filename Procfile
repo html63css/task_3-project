@@ -1,1 +1,1 @@
-waitress-serve --listen=*:8000 task_3.wsgi:application
+web: waitress-serve --port=$PORT website:task_3
