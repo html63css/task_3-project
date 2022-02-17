@@ -7,8 +7,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
+<<<<<<< HEAD
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import AuthenticationForm
+=======
+from django.contrib.auth.models import User
+from main.models import Account
+from django.contrib.auth.forms import AuthenticationForm
+from django.core.exceptions import ValidationError
+>>>>>>> 0ca27cc1f93f47fae5a4a62753172412a7d35f33
 
 class DataMixin:
     def get_user_context(self, **kwargs):
@@ -18,6 +25,14 @@ class DataMixin:
         if ('cat_selected' not in context):
             context['cat_selected'] = 0
         return context
+
+# class AuthenticationFormUser(AuthenticationForm):
+#     def confirm_login_allowed(self, user):
+#         if (1):
+#             raise ValidationError(
+#             ("This account is blocked."),
+#             code = 'block'
+#             )
 
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Username',widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Username','autocomplete':'off'}))
