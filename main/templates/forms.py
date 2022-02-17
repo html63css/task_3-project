@@ -6,6 +6,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from main.models import Account
 
 class DataMixin:
     def get_user_context(self, **kwargs):

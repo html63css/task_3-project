@@ -3,21 +3,20 @@
 {% block content %}
 
 {% if request.user.is_authenticated %}
-
 <h1 class="text-center">User: {{ request.user.username }}</h1>
 
-<form>
+<form action="users_table" method="get">
 <div class="jumbotron d-flex align-items-center ">
   <div class="container text-center">
-    <button disabled class="btn btn-primary" type="submit">Block</button>
-    <button disabled class="btn btn-primary" type="submit">Unblock</button>
-    <button disabled class="btn btn-primary" type="submit">Delete</button>
+    <button name="action" value="Block" class="btn btn-primary" type="submit">Block</button>
+    <button name="action" value="Unblock" class="btn btn-primary" type="submit">Unblock</button>
+    <button disabled name="action" value="Delete" class="btn btn-primary" type="submit">Delete</button>
   </div>
 </div>
 <table class="table">
   <thead>
     <tr>
-      <th scope="col"><input disabled class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
+      <th scope="col"><input class="form-check-input" type="checkbox" value="all" name="id_user" id="flexCheckDefault"></th>
       <th scope="col">id</th>
       <th scope="col">Username</th>
       <th scope="col">Email</th>
@@ -27,15 +26,15 @@
     </tr>
   </thead>
   <tbody>
-    {% for i in context %}
+    {% for i,j in context.items %}
     <tr>
-      <th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
+      <th><input class="form-check-input" type="checkbox" value="{{ i.id }}" name="id_user" id="flexCheckDefault"></th>
       <th scope="row">{{i.id}}</th>
       <td>{{i.username}}</td>
       <td>{{i.email}}</td>
       <td>{{i.date_joined}}</td>
       <td>{{i.last_login}}</td>
-      <td>     </td>
+      <td>{{j}}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -53,7 +52,7 @@
 {% else %}
   <h1 class="text-center">You are not authorized</h1>
   <br>
-  <div class="jumbotron align-items-center min-vh-100">
+  <div class="jumbotron align-items-center">
     <div class="container text-center">
       <!-- Log in to account -->
       <form action="log_in">
