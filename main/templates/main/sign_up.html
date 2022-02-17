@@ -9,7 +9,13 @@
       {% csrf_token %}
 
       {% if form.errors %}
-      {{form.errors}}
+      <div class="alert alert-danger" role="alert">
+        {{ form.errors.as_json }}
+        <!-- {% for e in form.errors.as_json %}
+        {{e}}
+        <br>
+        {% endfor %} -->
+      </div>
       {% endif %}
 
       {% for f in form %}
